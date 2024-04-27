@@ -1,0 +1,5 @@
+db.sqlite3
+.env
+equipos.py
+players.py
+__pycache__
