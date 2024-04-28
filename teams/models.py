@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Team(models.Model):
@@ -23,10 +24,13 @@ class Player(models.Model):
 class Fixture(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Match(models.Model):
     matchweek = models.ForeignKey(Fixture, on_delete=models.CASCADE, related_name='match_fixture')
     local = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='local_team')
     visitante = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='visitor_team')
-    match_day = models.DateTimeField(default='')
+    match_day = models.DateTimeField(null=True, default=datetime.today())
     state = models.BooleanField(default=False)
